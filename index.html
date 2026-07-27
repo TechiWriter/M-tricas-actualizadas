@@ -15,6 +15,9 @@
     --gray-500: #6b7280;
     --gray-800: #1f2937;
     --black: #000000;
+    --paid: #2563eb;
+    --paid-bg: #eff6ff;
+    --paid-border: #bfdbfe;
   }
   *{box-sizing:border-box;}
   body{
@@ -248,6 +251,52 @@
     border-radius:10px;
     font-weight:600;
   }
+  .sub-toggle{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+  }
+  .sub-toggle button{
+    flex:1;
+    background:var(--gray-50);
+    border:1px solid var(--gray-200);
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--gray-500);
+    cursor:pointer;
+    text-align:left;
+  }
+  .sub-toggle button .tag{
+    display:block;
+    font-size:10px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    margin-bottom:2px;
+  }
+  .sub-toggle button.active-organic{
+    background:var(--gray-800);
+    color:#ffffff;
+    border-color:var(--gray-800);
+  }
+  .sub-toggle button.active-organic .tag{color:var(--gray-300);}
+  .sub-toggle button.active-paid{
+    background:var(--paid);
+    color:#ffffff;
+    border-color:var(--paid);
+  }
+  .sub-toggle button.active-paid .tag{color:#dbeafe;}
+  .sub-view{display:none;}
+  .sub-view.active{display:block;}
+  .paid-accent .kpi{background:var(--paid-bg);border-color:var(--paid-border);}
+  .paid-accent .kpi .value{color:var(--paid);}
+  .paid-accent .bar-fill{background:var(--paid);}
+  .paid-accent .mini-metric{background:var(--paid-bg);border-color:var(--paid-border);}
+  .paid-accent .mini-metric .v{color:var(--paid);}
+  .paid-accent .panel h2 .dot{background:var(--paid);}
+  .compare-table td.paid-col, .compare-table th.paid-col{color:var(--paid);}
   .mini-metric-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -285,8 +334,7 @@
 
   <div class="header">
     <h1><span class="spark">✦</span> Not Business as Usual <span class="spark">✦</span></h1>
-    <p>Organic campaign report · Digital Harbor · July 2026</p>
-    <div class="badge">100% organic reach</div>
+    <p>Campaign report · Digital Harbor · July 2026</p>
   </div>
 
   <div class="tabs">
@@ -530,6 +578,236 @@
     </div>
 
     <div class="panel" style="margin-bottom:24px;">
+      <h2><span class="dot"></span>TikTok — organic vs. paid (TikTok Ads)</h2>
+
+      <div class="sub-toggle">
+        <button id="btn-organic" class="active-organic" onclick="showSub('organic')">
+          <span class="tag">Organic</span>Full spot — no paid boost
+        </button>
+        <button id="btn-paid" onclick="showSub('paid')">
+          <span class="tag">Paid</span>Full spot — TikTok Ads
+        </button>
+      </div>
+
+      <div id="sub-organic" class="sub-view active">
+        <div class="grid">
+          <div class="kpi">
+            <div class="label">Views</div>
+            <div class="value">795</div>
+            <div class="sub">Viewers, organic reach only</div>
+          </div>
+          <div class="kpi">
+            <div class="label">New vs. returning</div>
+            <div class="value">16% / 84%</div>
+            <div class="sub">16% new viewers</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Non-followers</div>
+            <div class="value">39%</div>
+            <div class="sub">61% already followed the account</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Male audience</div>
+            <div class="value">75%</div>
+            <div class="sub">25% female</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sub-paid" class="sub-view paid-accent">
+        <div class="grid">
+          <div class="kpi">
+            <div class="label">Video views</div>
+            <div class="value">15K</div>
+            <div class="sub">47h:14m:46s total watch time</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Avg. watch time</div>
+            <div class="value">12.06s</div>
+            <div class="sub">6.4% watched the full video</div>
+          </div>
+          <div class="kpi">
+            <div class="label">New vs. returning</div>
+            <div class="value">89% / 11%</div>
+            <div class="sub">89% brand-new viewers</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Non-followers</div>
+            <div class="value">95%</div>
+            <div class="sub">Almost entirely new audience</div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:20px;">
+          <h2><span class="dot"></span>Engagement (TikTok Ads)</h2>
+          <div class="mini-metric-grid">
+            <div class="mini-metric"><div class="l">Likes</div><div class="v">58</div></div>
+            <div class="mini-metric"><div class="l">Comments</div><div class="v">3</div></div>
+            <div class="mini-metric"><div class="l">Shares</div><div class="v">17</div></div>
+            <div class="mini-metric"><div class="l">Saves</div><div class="v">13</div></div>
+          </div>
+          <div class="quote-card">
+            <div class="who">Ruben Ramos108 <span>· public comment</span></div>
+            <p>"AI is powerful, just make the company's videos with it from now on"</p>
+          </div>
+        </div>
+
+        <div class="panels" style="margin-bottom:0;">
+          <div class="panel">
+            <h2><span class="dot"></span>Audience profile (paid)</h2>
+            <div class="demo-block">
+              <div class="t">Age</div>
+              <div class="barwrap">
+                <div class="bar-line"><div class="lab">25–34</div><div class="bar-track"><div class="bar-fill" style="width:52%"></div></div><div>52%</div></div>
+                <div class="bar-line"><div class="lab">35–44</div><div class="bar-track"><div class="bar-fill" style="width:46%"></div></div><div>46%</div></div>
+                <div class="bar-line"><div class="lab">18–24</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>2%</div></div>
+              </div>
+            </div>
+            <div class="demo-block">
+              <div class="t">Location</div>
+              <div class="barwrap">
+                <div class="bar-line"><div class="lab">Bolivia</div><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><div>78.2%</div></div>
+                <div class="bar-line"><div class="lab">Brazil</div><div class="bar-track"><div class="bar-fill" style="width:17%"></div></div><div>17.1%</div></div>
+                <div class="bar-line"><div class="lab">USA</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>2.4%</div></div>
+              </div>
+            </div>
+            <div class="demo-block">
+              <div class="t">Gender</div>
+              <div class="barwrap">
+                <div class="bar-line"><div class="lab">Male</div><div class="bar-track"><div class="bar-fill" style="width:69%"></div></div><div>69%</div></div>
+                <div class="bar-line"><div class="lab">Female</div><div class="bar-track"><div class="bar-fill" style="width:31%"></div></div><div>31%</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2><span class="dot"></span>Organic vs. Paid — radar</h2>
+            <p style="font-size:11px;color:var(--gray-400);margin:0 0 10px;line-height:1.5;">
+              5 categories, each scored relative to whichever side performed best (100% = strongest run on that axis).
+            </p>
+            <div style="display:flex;justify-content:center;">
+              <svg viewBox="0 0 340 340" width="280" height="280">
+                <polygon points="170,60 274.6,136.0 234.66,258.99 105.34,258.99 65.4,136.0" fill="none" stroke="var(--gray-200)" stroke-width="1"/>
+                <polygon points="170,87.5 248.47,144.5 218.49,236.74 121.51,236.74 91.53,144.5" fill="none" stroke="var(--gray-200)" stroke-width="1"/>
+                <polygon points="170,115 222.31,153.0 202.33,214.5 137.67,214.5 117.69,153.0" fill="none" stroke="var(--gray-200)" stroke-width="1"/>
+                <polygon points="170,142.5 196.16,161.5 186.16,192.25 153.84,192.25 143.84,161.5" fill="none" stroke="var(--gray-200)" stroke-width="1"/>
+                <line x1="170" y1="170" x2="170" y2="60" stroke="var(--gray-200)" stroke-width="1"/>
+                <line x1="170" y1="170" x2="274.6" y2="136.0" stroke="var(--gray-200)" stroke-width="1"/>
+                <line x1="170" y1="170" x2="234.66" y2="258.99" stroke="var(--gray-200)" stroke-width="1"/>
+                <line x1="170" y1="170" x2="105.34" y2="258.99" stroke="var(--gray-200)" stroke-width="1"/>
+                <line x1="170" y1="170" x2="65.4" y2="136.0" stroke="var(--gray-200)" stroke-width="1"/>
+
+                <polygon points="170,163.4 265.0,139.14 224.31,244.75 130.56,224.28 110.37,150.62" fill="rgba(31,41,55,0.15)" stroke="var(--gray-800)" stroke-width="2"/>
+                <polygon points="170,60 251.82,143.42 177.11,179.79 166.77,174.45 115.60,152.32" fill="rgba(37,99,235,0.12)" stroke="var(--paid)" stroke-width="2" stroke-dasharray="4,3"/>
+
+                <text x="170" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="var(--gray-800)">Reach</text>
+                <text x="293.6" y="129.8" text-anchor="start" font-size="11" font-weight="700" fill="var(--gray-800)">Bolivia match</text>
+                <text x="246.4" y="270" text-anchor="start" font-size="11" font-weight="700" fill="var(--gray-800)">Returning %</text>
+                <text x="93.6" y="270" text-anchor="end" font-size="11" font-weight="700" fill="var(--gray-800)">Followers %</text>
+                <text x="46.4" y="129.8" text-anchor="end" font-size="11" font-weight="700" fill="var(--gray-800)">Age 25–34 match</text>
+              </svg>
+            </div>
+            <div style="display:flex;justify-content:center;gap:20px;margin-top:6px;">
+              <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--gray-800);">
+                <span style="width:12px;height:12px;background:rgba(31,41,55,0.4);border:2px solid var(--gray-800);border-radius:3px;display:inline-block;"></span> Organic
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--paid);">
+                <span style="width:12px;height:12px;background:rgba(37,99,235,0.25);border:2px dashed var(--paid);border-radius:3px;display:inline-block;"></span> Paid
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin:12px 0 0;line-height:1.6;">
+              Paid stretches furthest on <strong>Reach</strong> (~16x organic) but pulls back on <strong>Returning %</strong> and <strong>Followers %</strong> — a colder, broader audience. Organic stays smaller but consistently closer to the core, warm B2B audience on every other axis.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="margin-top:22px;"><span class="dot"></span>Side-by-side comparison</h2>
+      <table class="compare-table">
+        <tr>
+          <th>Metric</th>
+          <th>Organic</th>
+          <th class="paid-col">Paid (TikTok Ads)</th>
+        </tr>
+        <tr>
+          <td class="strong">Views / viewers</td>
+          <td>795</td>
+          <td class="paid-col">15,000</td>
+        </tr>
+        <tr>
+          <td class="strong">New viewers</td>
+          <td>16%</td>
+          <td class="paid-col">89%</td>
+        </tr>
+        <tr>
+          <td class="strong">Non-followers reached</td>
+          <td>39%</td>
+          <td class="paid-col">95%</td>
+        </tr>
+        <tr>
+          <td class="strong">Bolivia share of audience</td>
+          <td>90.8%</td>
+          <td class="paid-col">78.2%</td>
+        </tr>
+        <tr>
+          <td class="strong">Male audience</td>
+          <td>75%</td>
+          <td class="paid-col">69%</td>
+        </tr>
+        <tr>
+          <td class="strong">Full video completion</td>
+          <td>—</td>
+          <td class="paid-col">6.4%</td>
+        </tr>
+      </table>
+      <p style="font-size:11px;color:var(--gray-400);margin:12px 0 0;">
+        Paid media multiplies raw reach and unlocks new, non-follower audiences (Brazil, USA), but organic reach keeps a tighter demographic match to the core Bolivia B2B segment.
+      </p>
+    </div>
+
+    <div class="panel" style="margin-bottom:24px;">
+      <h2><span class="dot"></span>ROI — $5 USD investment</h2>
+      <p style="font-size:13px;color:var(--gray-500);margin:0 0 14px;line-height:1.6;">
+        A minimal $5 budget was tested on TikTok Ads to see how far paid reach could stretch a full-spot video, without treating cost-efficiency as the campaign's main goal.
+      </p>
+      <div class="mini-metric-grid">
+        <div class="mini-metric"><div class="l">Total spend</div><div class="v">$5.00</div></div>
+        <div class="mini-metric"><div class="l">Cost per 1,000 views</div><div class="v">$0.33</div></div>
+        <div class="mini-metric"><div class="l">Cost per 1,000 viewers</div><div class="v">$0.38</div></div>
+        <div class="mini-metric"><div class="l">Cost per engagement</div><div class="v">$0.055</div></div>
+      </div>
+      <table class="compare-table">
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td class="strong">Video views generated</td>
+          <td>15,000</td>
+        </tr>
+        <tr>
+          <td class="strong">Unique viewers reached</td>
+          <td>13,000</td>
+        </tr>
+        <tr>
+          <td class="strong">Total engagements (likes + comments + shares + saves)</td>
+          <td>91</td>
+        </tr>
+        <tr>
+          <td class="strong">Engagement rate on viewers</td>
+          <td>0.7%</td>
+        </tr>
+        <tr>
+          <td class="strong">Reach multiple vs. organic (13,000 vs. 795)</td>
+          <td>~16x</td>
+        </tr>
+      </table>
+      <p style="font-size:11px;color:var(--gray-400);margin:12px 0 0;line-height:1.6;">
+        At this spend level, cost-per-view and cost-per-engagement are both extremely low — the $5 test bought a meaningfully larger, if less precisely targeted, audience than the organic run alone. The trade-off is the same one shown in the radar above: paid wins decisively on raw reach, while organic wins on audience precision (local match, returning viewers, existing followers).
+      </p>
+    </div>
+
+    <div class="panel" style="margin-bottom:24px;">
       <h2><span class="dot"></span>Hashtag study — niche strategy</h2>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
         <span class="flag">#DigitalHarbor</span>
@@ -664,6 +942,15 @@
     document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
     document.getElementById('tab-'+name).classList.add('active');
     event.currentTarget.classList.add('active');
+  }
+
+  function showSub(name){
+    document.getElementById('sub-organic').classList.remove('active');
+    document.getElementById('sub-paid').classList.remove('active');
+    document.getElementById('btn-organic').classList.remove('active-organic');
+    document.getElementById('btn-paid').classList.remove('active-paid');
+    document.getElementById('sub-'+name).classList.add('active');
+    document.getElementById('btn-'+name).classList.add(name === 'organic' ? 'active-organic' : 'active-paid');
   }
 </script>
 
