@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard — Not Business as Usual</title>
+<style>
+  :root{
+    --bg: #ffffff;
+    --card: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-800: #1f2937;
+    --black: #000000;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--gray-800);
+    padding:32px;
+  }
+  .wrap{max-width:1100px;margin:0 auto;}
+  .header{
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .header h1{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+    color:var(--black);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+  }
+  .header h1 .spark{color:var(--gray-400);font-size:18px;}
+  .header p{
+    margin:6px 0 0;
+    color:var(--gray-400);
+    font-size:14px;
+  }
+  .badge{
+    display:inline-block;
+    background:var(--gray-200);
+    color:var(--black);
+    font-size:12px;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:20px;
+    margin-top:12px;
+  }
+  .tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:24px;
+    border-bottom:1px solid var(--gray-200);
+    justify-content:center;
+  }
+  .tab-btn{
+    background:none;
+    border:none;
+    font-size:14px;
+    font-weight:600;
+    color:var(--gray-500);
+    padding:10px 18px;
+    cursor:pointer;
+    border-bottom:3px solid transparent;
+    margin-bottom:-1px;
+  }
+  .tab-btn.active{
+    color:var(--black);
+    border-bottom:3px solid var(--gray-800);
+  }
+  .tab-content{display:none;}
+  .tab-content.active{display:block;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .kpi{
+    background:var(--gray-50);
+    border:1px solid var(--gray-200);
+    border-radius:12px;
+    padding:18px 20px;
+  }
+  .kpi .label{
+    font-size:11px;
+    color:var(--gray-500);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .kpi .value{
+    font-size:26px;
+    font-weight:700;
+    color:var(--black);
+  }
+  .kpi .sub{
+    font-size:12px;
+    color:var(--gray-400);
+    margin-top:4px;
+  }
+  .panels{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap:20px;
+    margin-bottom:24px;
+  }
+  .panel{
+    background:var(--card);
+    border:1px solid var(--gray-200);
+    border-radius:12px;
+    padding:20px 22px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  }
+  .panel h2{
+    font-size:13px;
+    color:var(--gray-500);
+    margin:0 0 14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .dot{
+    width:6px;height:6px;border-radius:50%;background:var(--gray-400);display:inline-block;
+  }
+  .platform-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 0;
+    border-bottom:1px solid var(--gray-100);
+    font-size:13px;
+  }
+  .platform-row:last-child{border-bottom:none;}
+  .platform-name{
+    font-weight:700;
+    color:var(--black);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:110px;
+  }
+  .mini-bar-bg{
+    flex:1;
+    height:8px;
+    background:var(--gray-100);
+    border-radius:6px;
+    margin:0 12px;
+    overflow:hidden;
+  }
+  .mini-bar-fill{
+    height:100%;
+    background:var(--gray-800);
+    border-radius:6px;
+  }
+  .platform-val{
+    font-weight:700;
+    color:var(--black);
+    width:60px;
+    text-align:right;
+  }
+  .quote-card{
+    background:var(--gray-50);
+    border-left:4px solid var(--gray-300);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-top:14px;
+  }
+  .quote-card .who{
+    font-size:11px;
+    font-weight:700;
+    color:var(--gray-800);
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+  }
+  .quote-card .who span{
+    font-weight:400;
+    color:var(--gray-400);
+    text-transform:none;
+  }
+  .quote-card p{
+    margin:0;
+    font-size:13px;
+    color:var(--gray-800);
+    font-style:italic;
+    line-height:1.5;
+  }
+  .demo-block{margin-bottom:14px;}
+  .demo-block .t{
+    font-size:11px;
+    color:var(--gray-500);
+    font-weight:600;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+  }
+  .barwrap{display:flex;flex-direction:column;gap:6px;}
+  .bar-line{display:flex;align-items:center;gap:8px;font-size:12px;}
+  .bar-line .lab{width:56px;color:var(--gray-800);font-weight:600;}
+  .bar-track{flex:1;background:var(--gray-100);border-radius:6px;height:12px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--gray-800);border-radius:6px;}
+  .footer-link{
+    margin-top:24px;
+    background:var(--gray-100);
+    border:1px solid var(--gray-200);
+    border-radius:12px;
+    padding:18px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .footer-link .txt{color:var(--gray-800);font-size:13px;}
+  .footer-link .txt strong{display:block;font-size:15px;margin-bottom:2px;color:var(--black);}
+  .footer-link a{
+    background:var(--gray-200);
+    color:var(--black);
+    text-decoration:none;
+    font-weight:600;
+    font-size:13px;
+    padding:10px 18px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .footer-link a:hover{background:var(--gray-300);}
+  .flags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+  .flag{
+    font-size:11px;
+    background:var(--gray-100);
+    color:var(--gray-800);
+    border:1px solid var(--gray-200);
+    padding:3px 9px;
+    border-radius:10px;
+    font-weight:600;
+  }
+  .mini-metric-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .mini-metric{
+    background:var(--gray-50);
+    border:1px solid var(--gray-200);
+    border-radius:10px;
+    padding:10px 12px;
+  }
+  .mini-metric .l{font-size:11px;color:var(--gray-500);font-weight:600;margin-bottom:2px;}
+  .mini-metric .v{font-size:17px;font-weight:700;color:var(--black);}
+  table{width:100%;border-collapse:collapse;font-size:12px;}
+  th{text-align:left;padding:8px 6px;color:var(--gray-500);font-weight:600;border-bottom:1px solid var(--gray-200);text-transform:uppercase;letter-spacing:0.3px;font-size:11px;}
+  td{padding:8px 6px;border-bottom:1px solid var(--gray-100);color:var(--gray-800);}
+  td.strong{font-weight:700;color:var(--black);}
+  .footer-sig{
+    text-align:center;
+    margin-top:32px;
+    font-size:12px;
+    color:var(--gray-400);
+  }
+  .footer-sig .stars{display:block;margin-bottom:6px;letter-spacing:4px;}
+  @media (max-width:800px){
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .panels{grid-template-columns:1fr;}
+    .mini-metric-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1><span class="spark">✦</span> Not Business as Usual <span class="spark">✦</span></h1>
+    <p>Organic campaign report · Digital Harbor · July 2026</p>
+    <div class="badge">100% organic reach</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('teaser')">Teaser</button>
+    <button class="tab-btn" onclick="showTab('spot')">Full spot</button>
+    <button class="tab-btn" onclick="showTab('dhnews')">DHNews</button>
+  </div>
+
+  <div id="tab-teaser" class="tab-content active">
+
+    <div class="grid">
+      <div class="kpi">
+        <div class="label">Total impressions</div>
+        <div class="value">2,627</div>
+        <div class="sub">LinkedIn 1,920 · TikTok 707</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Total interactions</div>
+        <div class="value">179</div>
+        <div class="sub">LinkedIn 122 · Facebook 40 · TikTok 17</div>
+      </div>
+      <div class="kpi">
+        <div class="label">LinkedIn engagement rate</div>
+        <div class="value">6.4%</div>
+        <div class="sub">Above B2B benchmark (2–3%)</div>
+      </div>
+      <div class="kpi">
+        <div class="label">TikTok demographic match</div>
+        <div class="value">62%</div>
+        <div class="sub">Audience 25–34, Bolivia 91.8%</div>
+      </div>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <h2><span class="dot"></span>Reach by platform</h2>
+        <div class="platform-row">
+          <div class="platform-name">LinkedIn</div>
+          <div class="mini-bar-bg"><div class="mini-bar-fill" style="width:100%"></div></div>
+          <div class="platform-val">1,920</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-name">TikTok</div>
+          <div class="mini-bar-bg"><div class="mini-bar-fill" style="width:37%"></div></div>
+          <div class="platform-val">707</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-name">Facebook</div>
+          <div class="mini-bar-bg"><div class="mini-bar-fill" style="width:12%"></div></div>
+          <div class="platform-val">122*</div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-400);margin-top:8px;">*Facebook measured in interactions + clicks (40+18), not direct impressions</div>
+
+        <div class="quote-card">
+          <div class="who">Samra Y. · LinkedIn <span>· Building Attention &amp; Community Around Digital Launches</span></div>
+          <p>"Digital Harbor Bolivia, something interesting seems to be coming. I'll be watching for the update and what you have in store. Best of luck with the launch!"</p>
+        </div>
+
+        <div class="quote-card">
+          <div class="who">Tony004572 · TikTok <span>· public comment</span></div>
+          <p>"🤔🤔🤔 I don't get it, is it an event or what?"</p>
+        </div>
+
+        <div class="quote-card">
+          <div class="who">DM received on Facebook <span>· unprompted direct message</span></div>
+          <p>"I'd love to live that dream too, haha"</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="dot"></span>Audience profile (TikTok)</h2>
+        <div class="demo-block">
+          <div class="t">Age</div>
+          <div class="barwrap">
+            <div class="bar-line"><div class="lab">25–34</div><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div><div>62%</div></div>
+            <div class="bar-line"><div class="lab">18–24</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
+            <div class="bar-line"><div class="lab">35–44</div><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div><div>12%</div></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="t">Location</div>
+          <div class="barwrap">
+            <div class="bar-line"><div class="lab">Bolivia</div><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><div>91.8%</div></div>
+            <div class="bar-line"><div class="lab">Mexico</div><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><div>2.5%</div></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="t">Gender</div>
+          <div class="barwrap">
+            <div class="bar-line"><div class="lab">Male</div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><div>75%</div></div>
+            <div class="bar-line"><div class="lab">Female</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
+          </div>
+        </div>
+        <div class="flags">
+          <span class="flag">B2B niche</span>
+          <span class="flag">No paid promotion</span>
+          <span class="flag">Segment hashtags</span>
+          <span class="flag">+ Unprompted DMs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:24px;">
+      <h2><span class="dot"></span>Hashtag study — niche strategy</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+        <span class="flag">#DigitalHarbor</span>
+        <span class="flag">#SoftwareCompany</span>
+        <span class="flag">#EnterpriseApps</span>
+        <span class="flag">#EnterpriseSoftware</span>
+        <span class="flag">#B2BSoftware</span>
+      </div>
+      <table>
+        <tr>
+          <th>Hashtag</th>
+          <th>Segment type</th>
+          <th>Function</th>
+        </tr>
+        <tr>
+          <td class="strong">#DigitalHarbor</td>
+          <td>Own brand</td>
+          <td>Identity and campaign traceability</td>
+        </tr>
+        <tr>
+          <td class="strong">#EnterpriseSoftware</td>
+          <td>Broad category</td>
+          <td>Entry point to B2B decision-makers</td>
+        </tr>
+        <tr>
+          <td class="strong">#B2BSoftware</td>
+          <td>Specific niche</td>
+          <td>Filters out irrelevant consumer audiences</td>
+        </tr>
+        <tr>
+          <td class="strong">#EnterpriseApps</td>
+          <td>Specific niche</td>
+          <td>Aligns with the actual product (DH suite)</td>
+        </tr>
+        <tr>
+          <td class="strong">#SoftwareCompany</td>
+          <td>Broad category</td>
+          <td>Reinforces industry positioning</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer-link">
+      <div class="txt">
+        <strong>Teaser video on TikTok</strong>
+        Digital Harbor Bolivia — @digitalharborbolivia
+      </div>
+      <a href="https://www.tiktok.com/@digitalharborbolivia/video/7660191962808552725" target="_blank" rel="noopener">Watch video ↗</a>
+    </div>
+
+  </div>
+
+  <div id="tab-spot" class="tab-content">
+
+    <div class="grid">
+      <div class="kpi">
+        <div class="label">LinkedIn impressions</div>
+        <div class="value">1,479</div>
+        <div class="sub">927 members reached</div>
+      </div>
+      <div class="kpi">
+        <div class="label">TikTok viewers</div>
+        <div class="value">795</div>
+        <div class="sub">84% returning · 61% followers</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Facebook views</div>
+        <div class="value">699</div>
+        <div class="sub">568 unique viewers</div>
+      </div>
+      <div class="kpi">
+        <div class="label">LinkedIn engagement</div>
+        <div class="value">5.4%</div>
+        <div class="sub">80 interactions · 69 clicks</div>
+      </div>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <h2><span class="dot"></span>LinkedIn — organic performance</h2>
+        <div class="mini-metric-grid">
+          <div class="mini-metric"><div class="l">Impressions</div><div class="v">1,479</div></div>
+          <div class="mini-metric"><div class="l">Members reached</div><div class="v">927</div></div>
+          <div class="mini-metric"><div class="l">Interactions</div><div class="v">80</div></div>
+          <div class="mini-metric"><div class="l">Engagement rate</div><div class="v">5.4%</div></div>
+          <div class="mini-metric"><div class="l">Clicks</div><div class="v">69</div></div>
+          <div class="mini-metric"><div class="l">Click rate</div><div class="v">4.7%</div></div>
+          <div class="mini-metric"><div class="l">Reactions</div><div class="v">7</div></div>
+          <div class="mini-metric"><div class="l">Shares</div><div class="v">4</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--gray-400);margin:0;">0 comments · 20 page views from this post · 0 new followers</p>
+
+        <h2 style="margin-top:22px;"><span class="dot"></span>Facebook — organic performance</h2>
+        <div class="mini-metric-grid">
+          <div class="mini-metric"><div class="l">Views</div><div class="v">699</div></div>
+          <div class="mini-metric"><div class="l">Viewers</div><div class="v">568</div></div>
+          <div class="mini-metric"><div class="l">3-sec plays</div><div class="v">203</div></div>
+          <div class="mini-metric"><div class="l">Avg. retention</div><div class="v">7s</div></div>
+          <div class="mini-metric"><div class="l">Reactions</div><div class="v">12</div></div>
+          <div class="mini-metric"><div class="l">Clicks</div><div class="v">12</div></div>
+          <div class="mini-metric"><div class="l">Shares</div><div class="v">3</div></div>
+          <div class="mini-metric"><div class="l">% viewed 20s</div><div class="v">6.9%</div></div>
+        </div>
+        <p style="font-size:11px;color:var(--gray-400);margin:0;">0 comments on this post · reactions: 10 like, 1 love, 1 wow</p>
+      </div>
+
+      <div class="panel">
+        <h2><span class="dot"></span>Audience profile (TikTok)</h2>
+        <div class="demo-block">
+          <div class="t">Age</div>
+          <div class="barwrap">
+            <div class="bar-line"><div class="lab">25–34</div><div class="bar-track"><div class="bar-fill" style="width:57%"></div></div><div>57%</div></div>
+            <div class="bar-line"><div class="lab">18–24</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
+            <div class="bar-line"><div class="lab">35–44</div><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><div>15%</div></div>
+            <div class="bar-line"><div class="lab">45–54</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>2%</div></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="t">Location</div>
+          <div class="barwrap">
+            <div class="bar-line"><div class="lab">Bolivia</div><div class="bar-track"><div class="bar-fill" style="width:91%"></div></div><div>90.8%</div></div>
+            <div class="bar-line"><div class="lab">Mexico</div><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><div>2.3%</div></div>
+            <div class="bar-line"><div class="lab">Peru</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>1.2%</div></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="t">Gender</div>
+          <div class="barwrap">
+            <div class="bar-line"><div class="lab">Male</div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><div>75%</div></div>
+            <div class="bar-line"><div class="lab">Female</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
+          </div>
+        </div>
+        <div class="flags">
+          <span class="flag">No Facebook comments</span>
+          <span class="flag">Consistent demographic match</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:24px;">
+      <h2><span class="dot"></span>Hashtag study — niche strategy</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+        <span class="flag">#DigitalHarbor</span>
+        <span class="flag">#SoftwareCompany</span>
+        <span class="flag">#EnterpriseApps</span>
+        <span class="flag">#EnterpriseSoftware</span>
+        <span class="flag">#B2BSoftware</span>
+      </div>
+      <table>
+        <tr>
+          <th>Hashtag</th>
+          <th>Segment type</th>
+          <th>Function</th>
+        </tr>
+        <tr>
+          <td class="strong">#DigitalHarbor</td>
+          <td>Own brand</td>
+          <td>Identity and campaign traceability</td>
+        </tr>
+        <tr>
+          <td class="strong">#EnterpriseSoftware</td>
+          <td>Broad category</td>
+          <td>Entry point to B2B decision-makers</td>
+        </tr>
+        <tr>
+          <td class="strong">#B2BSoftware</td>
+          <td>Specific niche</td>
+          <td>Filters out irrelevant consumer audiences</td>
+        </tr>
+        <tr>
+          <td class="strong">#EnterpriseApps</td>
+          <td>Specific niche</td>
+          <td>Aligns with the actual product (DH suite)</td>
+        </tr>
+        <tr>
+          <td class="strong">#SoftwareCompany</td>
+          <td>Broad category</td>
+          <td>Reinforces industry positioning</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer-link">
+      <div class="txt">
+        <strong>Full spot video on TikTok</strong>
+        Digital Harbor Bolivia — @digitalharborbolivia
+      </div>
+      <a href="https://www.tiktok.com/@digitalharborbolivia/video/7662043694660439317" target="_blank" rel="noopener">Watch video ↗</a>
+    </div>
+
+  </div>
+
+  <div id="tab-dhnews" class="tab-content">
+
+    <div class="panel" style="margin-bottom:20px;">
+      <h2><span class="dot"></span>DHNews initiative — Issue #1</h2>
+      <p style="font-size:13px;color:var(--gray-800);margin:0 0 10px;line-height:1.6;">
+        First issue of Digital Harbor's internal newspaper, available in <strong>digital and print</strong> format at the Cochabamba and La Paz offices. It included prize-based activities (holographic and magnetic stickers) to encourage active reading, and an open call for comments on which stories stood out most.
+      </p>
+      <div class="flags">
+        <span class="flag">Digital + print format</span>
+        <span class="flag">Cochabamba + La Paz</span>
+        <span class="flag">Gamified with prizes</span>
+        <span class="flag">#DHNews</span>
+      </div>
+
+      <div class="quote-card" style="margin-top:16px;">
+        <div class="who">Oscar O. <span>· comment on the launch post</span></div>
+        <p>"nice one"</p>
+      </div>
+      <div class="quote-card">
+        <div class="who">Natalia V. <span>· comment on the launch post</span></div>
+        <p>"I don't just like it, I love it &lt;3"</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot"></span>Sentiment analysis — DHNews #1: reception &amp; engagement</h2>
+      <p style="font-size:13px;color:var(--gray-500);margin:0 0 14px;line-height:1.6;">
+        For a first issue, sentiment is clearly positive and shows signs of organic traction: people asking to take part, humor bounced back, one real lead from the classifieds.
+      </p>
+      <table>
+        <tr>
+          <th>Comment type</th>
+          <th>Data</th>
+          <th>Interpretation</th>
+        </tr>
+        <tr>
+          <td class="strong">Reactions on the launch post</td>
+          <td>33 (❤️19, 😮7, 🔥4, 😂2, 👍1)</td>
+          <td>The video was fun and created a sense of shared humor.</td>
+        </tr>
+        <tr>
+          <td class="strong">Comments on the post</td>
+          <td>5+</td>
+          <td>Spontaneous, with emojis and their own humor (not just "congrats").</td>
+        </tr>
+        <tr>
+          <td class="strong">Participation in DOT (games/reactions)</td>
+          <td>11 people</td>
+          <td>Active engagement, not passive.</td>
+        </tr>
+        <tr>
+          <td class="strong">Printed copies vs. copies taken</td>
+          <td>10 → 3</td>
+          <td>Measures physical pickup, not readership — these are different metrics.</td>
+        </tr>
+        <tr>
+          <td class="strong">People asking for their own section / ideas for #2</td>
+          <td>2</td>
+          <td>High value — out-loop engagement, they want to be part of the product.</td>
+        </tr>
+        <tr>
+          <td class="strong">Leads generated by classifieds</td>
+          <td>1 (dev offering to help as UX/UI for Yoodle)</td>
+          <td>Proof of concept: the format works even outside its direct target.</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="footer-sig">
+    <span class="stars">✦ ✦ ✦</span>
+  </div>
+
+</div>
+
+<script>
+  function showTab(name){
+    document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
+    document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
+    document.getElementById('tab-'+name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
