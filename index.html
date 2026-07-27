@@ -297,6 +297,19 @@
   .paid-accent .mini-metric .v{color:var(--paid);}
   .paid-accent .panel h2 .dot{background:var(--paid);}
   .compare-table td.paid-col, .compare-table th.paid-col{color:var(--paid);}
+  .mark-tag{
+    display:inline-block;
+    font-size:9px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+    padding:2px 8px;
+    border-radius:8px;
+    margin-left:8px;
+    vertical-align:middle;
+  }
+  .mark-organic{background:var(--gray-800);color:#ffffff;}
+  .mark-paid{background:var(--paid);color:#ffffff;}
   .mini-metric-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -515,65 +528,29 @@
       </div>
     </div>
 
-    <div class="panels">
-      <div class="panel">
-        <h2><span class="dot"></span>LinkedIn — organic performance</h2>
-        <div class="mini-metric-grid">
-          <div class="mini-metric"><div class="l">Impressions</div><div class="v">1,479</div></div>
-          <div class="mini-metric"><div class="l">Members reached</div><div class="v">927</div></div>
-          <div class="mini-metric"><div class="l">Interactions</div><div class="v">80</div></div>
-          <div class="mini-metric"><div class="l">Engagement rate</div><div class="v">5.4%</div></div>
-          <div class="mini-metric"><div class="l">Clicks</div><div class="v">69</div></div>
-          <div class="mini-metric"><div class="l">Click rate</div><div class="v">4.7%</div></div>
-          <div class="mini-metric"><div class="l">Reactions</div><div class="v">7</div></div>
-          <div class="mini-metric"><div class="l">Shares</div><div class="v">4</div></div>
-        </div>
-        <p style="font-size:11px;color:var(--gray-400);margin:0;">0 comments · 20 page views from this post · 0 new followers</p>
-
-        <h2 style="margin-top:22px;"><span class="dot"></span>Facebook — organic performance</h2>
-        <div class="mini-metric-grid">
-          <div class="mini-metric"><div class="l">Views</div><div class="v">699</div></div>
-          <div class="mini-metric"><div class="l">Viewers</div><div class="v">568</div></div>
-          <div class="mini-metric"><div class="l">3-sec plays</div><div class="v">203</div></div>
-          <div class="mini-metric"><div class="l">Avg. retention</div><div class="v">7s</div></div>
-          <div class="mini-metric"><div class="l">Reactions</div><div class="v">12</div></div>
-          <div class="mini-metric"><div class="l">Clicks</div><div class="v">12</div></div>
-          <div class="mini-metric"><div class="l">Shares</div><div class="v">3</div></div>
-          <div class="mini-metric"><div class="l">% viewed 20s</div><div class="v">6.9%</div></div>
-        </div>
-        <p style="font-size:11px;color:var(--gray-400);margin:0;">0 comments on this post · reactions: 10 like, 1 love, 1 wow</p>
+    <div class="panel" style="margin-bottom:24px;">
+      <h2><span class="dot"></span>LinkedIn — organic performance</h2>
+      <div class="mini-metric-grid">
+        <div class="mini-metric"><div class="l">Impressions</div><div class="v">1,479</div></div>
+        <div class="mini-metric"><div class="l">Members reached</div><div class="v">927</div></div>
+        <div class="mini-metric"><div class="l">Interactions</div><div class="v">80</div></div>
+        <div class="mini-metric"><div class="l">Engagement rate</div><div class="v">5.4%</div></div>
+        <div class="mini-metric"><div class="l">Clicks</div><div class="v">69</div></div>
+        <div class="mini-metric"><div class="l">Click rate</div><div class="v">4.7%</div></div>
+        <div class="mini-metric"><div class="l">Reactions</div><div class="v">7</div></div>
+        <div class="mini-metric"><div class="l">Shares</div><div class="v">4</div></div>
       </div>
 
-      <div class="panel">
-        <h2><span class="dot"></span>Audience profile (TikTok)</h2>
-        <div class="demo-block">
-          <div class="t">Age</div>
-          <div class="barwrap">
-            <div class="bar-line"><div class="lab">25–34</div><div class="bar-track"><div class="bar-fill" style="width:57%"></div></div><div>57%</div></div>
-            <div class="bar-line"><div class="lab">18–24</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
-            <div class="bar-line"><div class="lab">35–44</div><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><div>15%</div></div>
-            <div class="bar-line"><div class="lab">45–54</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>2%</div></div>
-          </div>
-        </div>
-        <div class="demo-block">
-          <div class="t">Location</div>
-          <div class="barwrap">
-            <div class="bar-line"><div class="lab">Bolivia</div><div class="bar-track"><div class="bar-fill" style="width:91%"></div></div><div>90.8%</div></div>
-            <div class="bar-line"><div class="lab">Mexico</div><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><div>2.3%</div></div>
-            <div class="bar-line"><div class="lab">Peru</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>1.2%</div></div>
-          </div>
-        </div>
-        <div class="demo-block">
-          <div class="t">Gender</div>
-          <div class="barwrap">
-            <div class="bar-line"><div class="lab">Male</div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><div>75%</div></div>
-            <div class="bar-line"><div class="lab">Female</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
-          </div>
-        </div>
-        <div class="flags">
-          <span class="flag">No Facebook comments</span>
-          <span class="flag">Consistent demographic match</span>
-        </div>
+      <h2 style="margin-top:22px;"><span class="dot"></span>Facebook — organic performance</h2>
+      <div class="mini-metric-grid">
+        <div class="mini-metric"><div class="l">Views</div><div class="v">699</div></div>
+        <div class="mini-metric"><div class="l">Viewers</div><div class="v">568</div></div>
+        <div class="mini-metric"><div class="l">3-sec plays</div><div class="v">203</div></div>
+        <div class="mini-metric"><div class="l">Avg. retention</div><div class="v">7s</div></div>
+        <div class="mini-metric"><div class="l">Reactions</div><div class="v">12</div></div>
+        <div class="mini-metric"><div class="l">Clicks</div><div class="v">12</div></div>
+        <div class="mini-metric"><div class="l">Shares</div><div class="v">3</div></div>
+        <div class="mini-metric"><div class="l">% viewed 20s</div><div class="v">6.9%</div></div>
       </div>
     </div>
 
@@ -610,6 +587,37 @@
             <div class="label">Male audience</div>
             <div class="value">75%</div>
             <div class="sub">25% female</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2><span class="dot"></span>Audience profile (TikTok)<span class="mark-tag mark-organic">Organic</span></h2>
+          <div class="demo-block">
+            <div class="t">Age</div>
+            <div class="barwrap">
+              <div class="bar-line"><div class="lab">25–34</div><div class="bar-track"><div class="bar-fill" style="width:57%"></div></div><div>57%</div></div>
+              <div class="bar-line"><div class="lab">18–24</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
+              <div class="bar-line"><div class="lab">35–44</div><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><div>15%</div></div>
+              <div class="bar-line"><div class="lab">45–54</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>2%</div></div>
+            </div>
+          </div>
+          <div class="demo-block">
+            <div class="t">Location</div>
+            <div class="barwrap">
+              <div class="bar-line"><div class="lab">Bolivia</div><div class="bar-track"><div class="bar-fill" style="width:91%"></div></div><div>90.8%</div></div>
+              <div class="bar-line"><div class="lab">Mexico</div><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><div>2.3%</div></div>
+              <div class="bar-line"><div class="lab">Peru</div><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><div>1.2%</div></div>
+            </div>
+          </div>
+          <div class="demo-block">
+            <div class="t">Gender</div>
+            <div class="barwrap">
+              <div class="bar-line"><div class="lab">Male</div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><div>75%</div></div>
+              <div class="bar-line"><div class="lab">Female</div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div><div>25%</div></div>
+            </div>
+          </div>
+          <div class="flags">
+            <span class="flag">Consistent demographic match</span>
           </div>
         </div>
       </div>
@@ -654,7 +662,7 @@
 
         <div class="panels" style="margin-bottom:0;">
           <div class="panel">
-            <h2><span class="dot"></span>Audience profile (paid)</h2>
+            <h2><span class="dot"></span>Audience profile (paid)<span class="mark-tag mark-paid">Paid</span></h2>
             <div class="demo-block">
               <div class="t">Age</div>
               <div class="barwrap">
@@ -726,8 +734,8 @@
       <table class="compare-table">
         <tr>
           <th>Metric</th>
-          <th>Organic</th>
-          <th class="paid-col">Paid (TikTok Ads)</th>
+          <th><span class="mark-tag mark-organic">Organic</span></th>
+          <th class="paid-col"><span class="mark-tag mark-paid">Paid</span></th>
         </tr>
         <tr>
           <td class="strong">Views / viewers</td>
